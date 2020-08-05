@@ -4,10 +4,6 @@ on:
   push:
     branches:
       - master
-    paths:
-      - ".github/workflows/deployARMTemplate.yml"
-      - "azuredeploy.json"
-
 jobs:
   deploy-virtual-network-template:
     runs-on: ubuntu-latest
@@ -20,9 +16,8 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-
       - name: Deploy ARM Template
         uses: azure/CLI@v1
         with:
           inlineScript: |
-            az deployment group create --resource-group GitHubActionExercise-rg --template-file azuredeploy.json
+            az deployment group create --resource-group GitHubActionExercise-rg --template-file ./azuredeploy.json
