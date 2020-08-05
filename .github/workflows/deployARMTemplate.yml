@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+
 jobs:
   deploy-virtual-network-template:
     runs-on: ubuntu-latest
