@@ -17,8 +17,10 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Deploy ARM Template
-        uses: azure/CLI@v1
+     - name: Deploy ARM Template
+        uses: azure/arm-deploy@v1
         with:
-          inlineScript: |
-            az deployment group create --resource-group GitHubActionExercise-rg --template-file ./azuredeploy.json
+          scope: subscription
+          subscriptionId: ${{ env.AZURE_SUBSCRIPTION_ID }}
+          resourceGroupName: ${{ env.AZURE_RESOURCE_GROUP }}
+          template: $GITHUB_WORKSPACE/azuredeploy.json
